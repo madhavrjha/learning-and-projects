@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <button onclick="getAllEmployees()">Get All Employee</button>
+  <button onclick="addEmployees()">Add Employee</button>
+  <button onclick="updateEmployees()">Update Employee</button>
+  <button onclick="deleteEmployees()">Delete Employee</button>
+
+  <script>
+    async function getAllEmployees() {
+      try {
+        const res = await fetch('http://localhost:3500/employee', { method: 'GET' });
+        switch (res.status) {
+          case 200:
+            const data = await res.json();
+            console.log(data);
+            break;
+          case 204:
+            console.log('No Employee Found');
+            break;
+          case 500:
+            console.log('Someting Wrong on our Server, please try again or after some time');
+            break;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function addEmployees() {
+      try {
+        const res = await fetch('http://localhost:3500/employee', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ firstname: 'Madhav', lastname: 'Jha' })
+        });
+        switch (res.status) {
+          case 201:
+            const data = await res.json();
+            console.log(data);
+            break;
+          case 400:
+            const message = await res.json();
+            console.warn(message);
+            break;
+          case 409:
+            console.log('This Employee Already Exists');
+            break;
+          case 500:
+            console.log('Someting Wrong on our Server, please try again or after some time');
+            break;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function updateEmployees() {
+      try {
+        const res = await fetch('http://localhost:3500/employee', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ id: "648684ef24881e6b7e027641", firstname: "Madhavkumar" })
+        });
+        switch (res.status) {
+          case 200:
+            const data = await res.json();
+            console.log(data);
+            break;
+          case 204:
+            console.log('No Employee Found with this id');
+            break;
+          case 400:
+            const message = await res.json();
+            console.warn(message);
+            break;
+          case 500:
+            console.log('Someting Wrong on our Server, please try again or after some time');
+            break;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function deleteEmployees() {
+      try {
+        const res = await fetch('http://localhost:3500/employee', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ id: "648684ef24881e6b7e027641" })
+        });
+        switch (res.status) {
+          // 200, 204, 400, 500
+          case 200:
+            const data = await res.json();
+            console.log(data);
+            break;
+          case 204:
+            console.log('No Employee Found with this id');
+            break;
+          case 400:
+            const message = await res.json();
+            console.warn(message);
+            break;
+          case 500:
+            console.log('Someting Wrong on our Server, please try again or after some time');
+            break;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+
+  </script>
+
+</body>
+
+</html>

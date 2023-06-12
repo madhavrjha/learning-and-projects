@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Employee CRUD in JSON</title>
+
+</head>
+
+<body>
+
+  <button onclick="getEmployees()">Get Employee</button>
+  <button onclick="addEmployee()">Add Employee</button>
+  <button onclick="updateEmployee()">Update Employee</button>
+  <button onclick="deleteEmployee()">Remove Employee</button>
+
+  <script>
+
+    async function getEmployees() {
+      try {
+        const response = await fetch('http://127.0.0.1:3500/employees');
+        if (!response.ok) throw new Error(`${response.status}: ${response.statusText}`);
+        const data = await response.json();
+        console.log(data);
+      } catch (err) {
+        console.error(err.message);
+      }
+    }
+
+    async function deleteEmployee() {
+      try {
+        const response = await fetch('http://127.0.0.1:3500/employees', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: 1 })
+        });
+        if (!response.ok) throw new Error(`${response.status}: ${response.statusText}`);
+        const data = await response.json();
+        console.log(data);
+      } catch (err) {
+        console.error(err.message);
+      }
+    }
+
+    async function updateEmployee() {
+      try {
+        const response = await fetch('http://127.0.0.1:3500/employees', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: 3, firstname: "Hello", lastname: 'World' })
+        });
+        if (!response.ok) throw new Error(`${response.status}: ${response.statusText}`);
+        const data = await response.json();
+        console.log(data);
+      } catch (err) {
+        console.error(err.message);
+      }
+    }
+
+
+    async function addEmployee() {
+      try {
+        const response = await fetch('http://127.0.0.1:3500/employees', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ firstname: "Pooja", lastname: 'Sawant' })
+        });
+        if (!response.ok) throw new Error(`${response.status}: ${response.statusText}`);
+        const data = await response.json();
+        console.log(data);
+      } catch (err) {
+        console.error(err.message);
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

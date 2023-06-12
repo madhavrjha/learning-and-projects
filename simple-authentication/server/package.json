@@ -1,0 +1,17 @@
+{
+  "name": "simple-authentication",
+  "version": "0.1.0",
+  "description": "trying to implement custom session for user authorization.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server"
+  },
+  "keywords": [],
+  "author": "Madhav Jha",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}

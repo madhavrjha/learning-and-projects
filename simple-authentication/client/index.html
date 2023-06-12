@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <button onclick="logIn()">Login</button>
+  <button onclick="dashboard()">Dashboard</button>
+  <button onclick="logout()">Logout</button>
+
+  <script>
+    async function logIn() {
+      try {
+        const response = await fetch('http://127.0.0.1:3500/login', {
+          method: 'post',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username: 'madhav' })
+        });
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+        }
+        else {
+          throw new Error(`${response.status}: ${response.statusText}`);
+        }
+      } catch (err) {
+        console.error(err.message);
+      }
+    }
+
+    async function dashboard() {
+      try {
+        const response = await fetch('http://127.0.0.1:3500/dashboard', {
+          method: 'get',
+          credentials: 'include'
+        });
+        if (response.ok) {
+          const data = await response.text();
+          console.log(data);
+        } else {
+          throw new Error(`${response.status}: ${response.statusText}`);
+        }
+      } catch (err) {
+        console.error(`${err.message}`);
+      }
+    }
+
+    async function logout() {
+      try {
+        const response = await fetch('http://127.0.0.1:3500/logout', {
+          method: 'get',
+          credentials: 'include'
+        });
+        if (!response.ok) {
+          throw new Error(`${response.status}: ${response.statusText}`);
+        }
+        console.log('logout');
+      } catch (err) {
+        console.error(`${err.message}`);
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

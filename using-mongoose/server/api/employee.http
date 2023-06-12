@@ -1,0 +1,30 @@
+@host = http://127.0.0.1:3500/employee
+
+GET {{host}}
+
+###
+POST {{host}}
+Content-Type: application/json
+
+{
+  "firstname": "Madhav",
+  "lastname": "Jha"
+}
+
+###
+PUT {{host}}
+Content-Type: application/json
+
+{
+  "id": "6485efc46ef57c03ff60fea8",
+  "firstname": "Neha", 
+  "lastname": "Singh"
+}
+
+###
+DELETE {{host}}
+Content-Type: application/json
+
+{
+  "id": "648601baa5be4010591d87f2"
+}

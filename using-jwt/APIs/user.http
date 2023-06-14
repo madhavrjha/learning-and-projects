@@ -1,0 +1,29 @@
+@host = http://127.0.0.1:3500
+
+
+// Register a New User
+POST {{host}}/register
+Content-Type: application/json
+
+{
+  "username": "madhav",
+  "password": "123456"
+}
+
+###
+
+// Login User
+POST {{host}}/auth
+Content-Type: application/json
+
+{
+  "username": "madhav",
+  "password": "123456"
+}
+
+###
+
+// Get All Users
+
+GET {{host}}/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hZGhhdiIsImlhdCI6MTY4NjcxNjEzNywiZXhwIjoxNjg2NzE2MTY3fQ.LoDkmKCmxwW9KNUJKzzX324os4NGdoIv8jym-CG0VRw

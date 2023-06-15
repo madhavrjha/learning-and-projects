@@ -1,17 +1,16 @@
 @host = http://127.0.0.1:3500
-
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hZGhhdiIsImlhdCI6MTY4NjgxMjEyNCwiZXhwIjoxNjg2ODEyNDI0fQ.yV0an_9DydE9itEkC8vgr_rRgVzPxQMy7mFt30syDEc
 
 // Register a New User
 POST {{host}}/register
 Content-Type: application/json
 
 {
-  "username": "madhav",
+  "username": "rakesh",
   "password": "123456"
 }
 
 ###
-
 // Login User
 POST {{host}}/auth
 Content-Type: application/json
@@ -22,8 +21,47 @@ Content-Type: application/json
 }
 
 ###
+// Refresh Token
+GET {{host}}/refresh
 
+
+###
+// Logout
+GET {{host}}/logout
+
+###
 // Get All Users
-
 GET {{host}}/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hZGhhdiIsImlhdCI6MTY4NjcxNjEzNywiZXhwIjoxNjg2NzE2MTY3fQ.LoDkmKCmxwW9KNUJKzzX324os4NGdoIv8jym-CG0VRw
+Authorization: Bearer {{accessToken}}
+
+###
+// Update User
+PUT {{host}}/users
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "id": "648ab5d626e43e284e3a5bcc",
+  "username": "sandeep"
+}
+
+###
+// Delete Users
+DELETE  {{host}}/users
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "id": "648ab5d626e43e284e3a5bcc"
+}
+
+###
+// Create New User
+POST {{host}}/users
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "username": "sandeep",
+  "password": "123456"
+}

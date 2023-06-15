@@ -12,13 +12,13 @@ const handleLogin = async (req, res) => {
     const match = await bcrypt.compare(password, foundUser.password);
     if (!match) return res.sendStatus(401);
 
-    const accessToken = await jwt.sign({ username }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30s' });
+    const accessToken = await jwt.sign({ username }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '5m' });
     const refrehsToken = await jwt.sign({ username }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
 
     foundUser.refreshToken = refrehsToken;
     const result = await foundUser.save();
 
-    res.cookie('jwt', refrehsToken, { httpOnly: true, sameSite: 'none', secure: true, maxAge: 86400 * 1000 });
+    res.cookie('jwt', refrehsToken, { httpOnly: true, sameSite: 'none', secure: true, maxAge: 86400 * 1000 }); // secure: true in production
     res.json({ accessToken });
   } catch (err) {
     console.error(err);

@@ -1,0 +1,39 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.App {
+  width: 400px;
+  min-height: 400px;
+  padding: 1rem;
+  margin: 1rem auto;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  text-align: center;
+}
+
+p, button {
+  margin: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table :is(td, th) {
+  border: 1px solid #aaa;
+  padding: 5px;
+  font-size: 0.9rem;
+}
